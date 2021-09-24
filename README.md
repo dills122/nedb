@@ -2,16 +2,18 @@
 
 ## The JavaScript Database
 
+This is Identical in features to the original `nedb` just with updated packages and the security vulnerabilities fixed. I plan to keep it as is with regards to features because I do believe this is feature complete, but PRs are welcome if you have new ideas or refreshes in mind.
+
 **Embedded persistent or in memory database for Node.js, nw.js, Electron and browsers, 100% JavaScript, no binary dependency**. API is a subset of MongoDB's and it's <a href="#speed">plenty fast</a>.
 
 ## Installation, tests
 
-Module name on npm and bower is `nedb`.
+Module name on npm and bower is `nedb-revived`.
 
 ```
-npm install nedb --save    # Put latest version in your package.json
+npm install nedb-revived --save    # Put latest version in your package.json
 npm test                   # You'll need the dev dependencies to launch tests
-bower install nedb         # For the browser versions, which will be in browser-version/out
+bower install nedb-revived         # For the browser versions, which will be in browser-version/out
 ```
 
 ## API
