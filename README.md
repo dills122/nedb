@@ -8,12 +8,12 @@ This is Identical in features to the original `nedb` just with updated packages 
 
 ## Installation, tests
 
-Module name on npm and bower is `nedb-revived`.
+Module name on npm and bower is `@dills1220/nedb`.
 
 ```
-npm install nedb-revived --save    # Put latest version in your package.json
+npm install @dills1220/nedb --save    # Put latest version in your package.json
 npm test                   # You'll need the dev dependencies to launch tests
-bower install nedb-revived         # For the browser versions, which will be in browser-version/out
+bower install @dills1220/nedb         # For the browser versions, which will be in browser-version/out
 ```
 
 ## API
