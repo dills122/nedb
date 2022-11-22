@@ -175,9 +175,9 @@ You can use the dot notation to navigate inside nested documents, arrays, arrays
 ```javascript
 // Let's say our datastore contains the following collection
 // { _id: 'id1', planet: 'Mars', system: 'solar', inhabited: false, satellites: ['Phobos', 'Deimos'] }
-// { _id: 'id2', planet: 'Earth', system: 'solar', inhabited: true, humans: { genders: 2, eyes: true } }
+// { _id: 'id2', planet: 'Earth', system: 'solar', inhabited: true, humans: { legs: 2, eyes: true } }
 // { _id: 'id3', planet: 'Jupiter', system: 'solar', inhabited: false }
-// { _id: 'id4', planet: 'Omicron Persei 8', system: 'futurama', inhabited: true, humans: { genders: 7 } }
+// { _id: 'id4', planet: 'Omicron Persei 8', system: 'futurama', inhabited: true, humans: { legs: 7 } }
 // { _id: 'id5', completeData: { planets: [ { name: 'Earth', number: 3 }, { name: 'Mars', number: 2 }, { name: 'Pluton', number: 9 } ] } }
 
 // Finding all planets in the solar system
@@ -197,7 +197,7 @@ db.find({ system: "solar", inhabited: true }, function (err, docs) {
 });
 
 // Use the dot-notation to match fields in subdocuments
-db.find({ "humans.genders": 2 }, function (err, docs) {
+db.find({ "humans.legs": 2 }, function (err, docs) {
   // docs contains Earth
 });
 
@@ -216,8 +216,8 @@ db.find({ "completeData.planets.0.name": "Earth" }, function (err, docs) {
 });
 
 // You can also deep-compare objects. Don't confuse this with dot-notation!
-db.find({ humans: { genders: 2 } }, function (err, docs) {
-  // docs is empty, because { genders: 2 } is not equal to { genders: 2, eyes: true }
+db.find({ humans: { legs: 2 } }, function (err, docs) {
+  // docs is empty, because { legs: 2 } is not equal to { legs: 2, eyes: true }
 });
 
 // Find all documents in the collection
@@ -243,8 +243,8 @@ The syntax is `{ field: { $op: value } }` where `$op` is any comparison operator
 
 ```javascript
 // $lt, $lte, $gt and $gte work on numbers and strings
-db.find({ "humans.genders": { $gt: 5 } }, function (err, docs) {
-  // docs contains Omicron Persei 8, whose humans have more than 5 genders (7).
+db.find({ "humans.legs": { $gt: 5 } }, function (err, docs) {
+  // docs contains Omicron Persei 8, whose humans have more than 5 legs (7).
 });
 
 // When used with strings, lexicographical order is used
@@ -387,9 +387,9 @@ If you don't specify a callback to `find`, `findOne` or `count`, a `Cursor` obje
 ```javascript
 // Let's say the database contains these 4 documents
 // doc1 = { _id: 'id1', planet: 'Mars', system: 'solar', inhabited: false, satellites: ['Phobos', 'Deimos'] }
-// doc2 = { _id: 'id2', planet: 'Earth', system: 'solar', inhabited: true, humans: { genders: 2, eyes: true } }
+// doc2 = { _id: 'id2', planet: 'Earth', system: 'solar', inhabited: true, humans: { legs: 2, eyes: true } }
 // doc3 = { _id: 'id3', planet: 'Jupiter', system: 'solar', inhabited: false }
-// doc4 = { _id: 'id4', planet: 'Omicron Persei 8', system: 'futurama', inhabited: true, humans: { genders: 7 } }
+// doc4 = { _id: 'id4', planet: 'Omicron Persei 8', system: 'futurama', inhabited: true, humans: { legs: 7 } }
 
 // No query used means all results are returned (before the Cursor modifiers)
 db.find({}).sort({ planet: 1 }).skip(1).limit(2).exec(function (err, docs) {
@@ -449,9 +449,9 @@ db.find({ planet: "Mars" })
 
 // Project on a nested document
 db.findOne({ planet: "Earth" })
-  .projection({ planet: 1, "humans.genders": 1 })
+  .projection({ planet: 1, "humans.legs": 1 })
   .exec(function (err, doc) {
-    // doc is { planet: 'Earth', _id: 'id2', humans: { genders: 2 } }
+    // doc is { planet: 'Earth', _id: 'id2', humans: { legs: 2 } }
   });
 ```
 
