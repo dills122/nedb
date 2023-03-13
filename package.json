@@ -34,7 +34,7 @@
     "underscore": "^1.13.1",
     "exec-time": "0.0.4",
     "mocha": "^10.0.0",
-    "sinon": "14.0.x"
+    "sinon": "15.0.x"
   },
   "scripts": {
     "test": "mocha \"./test/**/*.test.js\""
