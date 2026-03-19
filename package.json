@@ -35,7 +35,10 @@
     "sinon": "14.0.x"
   },
   "scripts": {
-    "test": "mocha \"./test/**/*.test.js\""
+    "test": "mocha \"./test/**/*.test.js\"",
+    "test:integration": "mocha \"./integration/**/*.integration.test.js\"",
+    "test:all": "npm test && npm run test:integration",
+    "example:basic": "node ./examples/basic-usage.js"
   },
   "main": "index",
   "browser": {
