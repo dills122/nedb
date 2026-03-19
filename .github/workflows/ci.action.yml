@@ -1,4 +1,4 @@
-name: CI Job
+name: CI
 
 on:
   pull_request:
@@ -9,6 +9,7 @@ on:
       - master
 jobs:
   pr_job:
+    name: Test v${{ matrix.node-version }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
