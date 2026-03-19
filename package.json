@@ -1,6 +1,6 @@
 {
   "name": "@dills1220/nedb",
-  "version": "1.8.4",
+  "version": "1.9.1",
   "author": {
     "name": "Dylan Steele",
     "email": "dylansteele57@gmail.com"
@@ -24,20 +24,21 @@
     "@yetzt/binary-search-tree": "^0.2.6",
     "async": "0.2.10",
     "localforage": "^1.3.0",
-    "lodash": "^4.17.21",
-    "mkdirp": "~0.5.1"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "chai": "^4.3.4",
-    "commander": "9.0.0",
-    "request": "^2.9.203",
+    "commander": "9.3.0",
     "underscore": "^1.13.1",
     "exec-time": "0.0.4",
-    "mocha": "^9.1.1",
-    "sinon": "13.0.x"
+    "mocha": "^10.0.0",
+    "sinon": "14.0.x"
   },
   "scripts": {
-    "test": "mocha \"./test/**/*.test.js\""
+    "test": "mocha \"./test/**/*.test.js\"",
+    "test:integration": "mocha \"./integration/**/*.integration.test.js\"",
+    "test:all": "npm test && npm run test:integration",
+    "example:basic": "node ./examples/basic-usage.js"
   },
   "main": "index",
   "browser": {
