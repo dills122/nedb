@@ -1,5 +1,8 @@
 <img src="http://i.imgur.com/9O1xHFb.png" style="width: 25%; height: 25%; float: left;">
 
+[![CI](https://github.com/dills122/nedb/actions/workflows/ci.action.yml/badge.svg?branch=master)](https://github.com/dills122/nedb/actions/workflows/ci.action.yml)
+[![npm version](https://img.shields.io/npm/v/%40dills1220%2Fnedb)](https://www.npmjs.com/package/@dills1220/nedb)
+
 ## The JavaScript Database
 
 This is Identical in features to the original `nedb` just with updated packages and the security vulnerabilities fixed. I plan to keep it as is with regards to features because I do believe this is feature complete, but PRs are welcome if you have new ideas or refreshes in mind.
@@ -267,7 +270,7 @@ db.find(
   { planet: { $regex: /ar/, $nin: ["Jupiter", "Earth"] } },
   function (err, docs) {
     // docs only contains Mars because Earth was excluded from the match by $nin
-  }
+  },
 );
 ```
 
@@ -293,14 +296,14 @@ db.find(
   { completeData: { planets: { $elemMatch: { name: "Earth", number: 3 } } } },
   function (err, docs) {
     // docs contains documents with id 5 (completeData)
-  }
+  },
 );
 
 db.find(
   { completeData: { planets: { $elemMatch: { name: "Earth", number: 5 } } } },
   function (err, docs) {
     // docs is empty
-  }
+  },
 );
 
 // You can use inside #elemMatch query any known document query operator
@@ -312,7 +315,7 @@ db.find(
   },
   function (err, docs) {
     // docs contains documents with id 5 (completeData)
-  }
+  },
 );
 
 // Note: you can't use nested comparison functions, e.g. { $size: { $lt: 5 } } will throw an error
@@ -353,7 +356,7 @@ db.find(
   { $or: [{ planet: "Earth" }, { planet: "Mars" }] },
   function (err, docs) {
     // docs contains Earth and Mars
-  }
+  },
 );
 
 db.find({ $not: { planet: "Earth" } }, function (err, docs) {
@@ -368,7 +371,7 @@ db.find(
   },
   function (err, docs) {
     // docs with more than 6 properties
-  }
+  },
 );
 
 // You can mix normal queries, comparison queries and logical operators
@@ -376,7 +379,7 @@ db.find(
   { $or: [{ planet: "Earth" }, { planet: "Mars" }], inhabited: true },
   function (err, docs) {
     // docs contains Earth
-  }
+  },
 );
 ```
 
@@ -423,7 +426,7 @@ db.find(
   { planet: 1, system: 1, _id: 0 },
   function (err, docs) {
     // docs is [{ planet: 'Mars', system: 'solar' }]
-  }
+  },
 );
 
 // Omitting only the given fields and removing _id
@@ -432,7 +435,7 @@ db.find(
   { planet: 0, system: 0, _id: 0 },
   function (err, docs) {
     // docs is [{ inhabited: false, satellites: ['Phobos', 'Deimos'] }]
-  }
+  },
 );
 
 // Failure: using both modes at the same time
@@ -660,7 +663,7 @@ db.ensureIndex({ fieldName: "somefield", unique: true }, function (err) {});
 // Using a sparse unique index
 db.ensureIndex(
   { fieldName: "somefield", unique: true, sparse: true },
-  function (err) {}
+  function (err) {},
 );
 
 // Format of the error message when the unique constraint is not met
@@ -680,7 +683,7 @@ db.removeIndex("somefield", function (err) {});
 // after their creation (db's timestampData option is true here)
 db.ensureIndex(
   { fieldName: "createdAt", expireAfterSeconds: 3600 },
-  function (err) {}
+  function (err) {},
 );
 
 // You can also use the option to set an expiration date like so
@@ -689,7 +692,7 @@ db.ensureIndex(
   function (err) {
     // Now all documents will expire when system time reaches the date in their
     // expirationDate field
-  }
+  },
 );
 ```
 
