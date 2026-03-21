@@ -27,11 +27,11 @@
     "lodash": "^4.17.23"
   },
   "devDependencies": {
-    "chai": "^4.5.0",
-    "commander": "9.5.0",
+    "chai": "^6.2.2",
+    "commander": "14.0.3",
     "exec-time": "0.0.4",
-    "mocha": "^10.8.2",
-    "sinon": "14.0.x",
+    "mocha": "^11.7.5",
+    "sinon": "^21.0.3",
     "underscore": "^1.13.8"
   },
   "scripts": {
