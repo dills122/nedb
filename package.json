@@ -22,22 +22,25 @@
   },
   "dependencies": {
     "@yetzt/binary-search-tree": "^0.2.6",
-    "async": "0.2.10",
-    "localforage": "^1.3.0",
-    "lodash": "^4.17.21"
+    "async": "^3.2.6",
+    "localforage": "^1.10.0",
+    "lodash": "^4.17.23"
   },
   "devDependencies": {
-    "chai": "^4.3.4",
-    "commander": "9.3.0",
-    "underscore": "^1.13.1",
+    "chai": "^6.2.2",
+    "commander": "14.0.3",
     "exec-time": "0.0.4",
-    "mocha": "^10.0.0",
-    "sinon": "14.0.x"
+    "mocha": "^11.7.5",
+    "nyc": "^17.1.0",
+    "sinon": "^21.0.3",
+    "underscore": "^1.13.8"
   },
   "scripts": {
     "test": "mocha \"./test/**/*.test.js\"",
     "test:integration": "mocha \"./integration/**/*.integration.test.js\"",
     "test:all": "npm test && npm run test:integration",
+    "coverage": "nyc --reporter=text-summary --reporter=lcov npm run test:all",
+    "coverage:check": "nyc --check-coverage --lines 90 --functions 90 --branches 85 --statements 90 --reporter=text-summary --reporter=lcov npm run test:all",
     "example:basic": "node ./examples/basic-usage.js"
   },
   "main": "index",
