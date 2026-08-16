@@ -19,7 +19,12 @@ npm test                   # You'll need the dev dependencies to launch tests
 bower install @dills1220/nedb         # For the browser versions, which will be in browser-version/out
 ```
 
-The 1.9.x release line is tested on Node.js 14 through Node.js 24. It intentionally retains compatibility with older supported applications while receiving dependency and security fixes.
+### Runtime compatibility
+
+- Version 2 requires Node.js 22.12.0 or newer and is tested on Node.js 22, 24, and 26.
+- Version 1.9.2 is the final compatibility release for applications that still need older Node.js versions.
+
+Upgrading from 1.9.2 to 2.0.0 does not change the documented CommonJS callback API or the on-disk persistence format. The breaking change is the supported Node.js runtime floor.
 
 ## API
 
@@ -272,7 +277,7 @@ db.find(
   { planet: { $regex: /ar/, $nin: ["Jupiter", "Earth"] } },
   function (err, docs) {
     // docs only contains Mars because Earth was excluded from the match by $nin
-  },
+  }
 );
 ```
 
@@ -298,14 +303,14 @@ db.find(
   { completeData: { planets: { $elemMatch: { name: "Earth", number: 3 } } } },
   function (err, docs) {
     // docs contains documents with id 5 (completeData)
-  },
+  }
 );
 
 db.find(
   { completeData: { planets: { $elemMatch: { name: "Earth", number: 5 } } } },
   function (err, docs) {
     // docs is empty
-  },
+  }
 );
 
 // You can use inside #elemMatch query any known document query operator
@@ -317,7 +322,7 @@ db.find(
   },
   function (err, docs) {
     // docs contains documents with id 5 (completeData)
-  },
+  }
 );
 
 // Note: you can't use nested comparison functions, e.g. { $size: { $lt: 5 } } will throw an error
@@ -358,7 +363,7 @@ db.find(
   { $or: [{ planet: "Earth" }, { planet: "Mars" }] },
   function (err, docs) {
     // docs contains Earth and Mars
-  },
+  }
 );
 
 db.find({ $not: { planet: "Earth" } }, function (err, docs) {
@@ -373,7 +378,7 @@ db.find(
   },
   function (err, docs) {
     // docs with more than 6 properties
-  },
+  }
 );
 
 // You can mix normal queries, comparison queries and logical operators
@@ -381,7 +386,7 @@ db.find(
   { $or: [{ planet: "Earth" }, { planet: "Mars" }], inhabited: true },
   function (err, docs) {
     // docs contains Earth
-  },
+  }
 );
 ```
 
@@ -428,7 +433,7 @@ db.find(
   { planet: 1, system: 1, _id: 0 },
   function (err, docs) {
     // docs is [{ planet: 'Mars', system: 'solar' }]
-  },
+  }
 );
 
 // Omitting only the given fields and removing _id
@@ -437,7 +442,7 @@ db.find(
   { planet: 0, system: 0, _id: 0 },
   function (err, docs) {
     // docs is [{ inhabited: false, satellites: ['Phobos', 'Deimos'] }]
-  },
+  }
 );
 
 // Failure: using both modes at the same time
@@ -665,7 +670,7 @@ db.ensureIndex({ fieldName: "somefield", unique: true }, function (err) {});
 // Using a sparse unique index
 db.ensureIndex(
   { fieldName: "somefield", unique: true, sparse: true },
-  function (err) {},
+  function (err) {}
 );
 
 // Format of the error message when the unique constraint is not met
@@ -685,7 +690,7 @@ db.removeIndex("somefield", function (err) {});
 // after their creation (db's timestampData option is true here)
 db.ensureIndex(
   { fieldName: "createdAt", expireAfterSeconds: 3600 },
-  function (err) {},
+  function (err) {}
 );
 
 // You can also use the option to set an expiration date like so
@@ -694,7 +699,7 @@ db.ensureIndex(
   function (err) {
     // Now all documents will expire when system time reaches the date in their
     // expirationDate field
-  },
+  }
 );
 ```
 

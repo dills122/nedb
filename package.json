@@ -1,6 +1,6 @@
 {
   "name": "@dills1220/nedb",
-  "version": "1.9.2",
+  "version": "2.0.0",
   "author": {
     "name": "Dylan Steele",
     "email": "dylansteele57@gmail.com"
@@ -24,6 +24,9 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "dependencies": {
     "@yetzt/binary-search-tree": "^0.2.6",
     "async": "^3.2.6",
@@ -32,7 +35,7 @@
   },
   "devDependencies": {
     "chai": "^6.2.2",
-    "commander": "14.0.3",
+    "commander": "15.0.0",
     "exec-time": "0.0.4",
     "mocha": "^11.8.0",
     "nyc": "^18.0.0",
