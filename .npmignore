@@ -4,3 +4,8 @@ test/
 test_lac/
 workspace/
 .github/
+.agents/
+.codex/
+.nyc_output/
+coverage/
+AGENTS.md
