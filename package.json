@@ -18,7 +18,11 @@
   "homepage": "https://github.com/dills122/nedb",
   "repository": {
     "type": "git",
-    "url": "git@github.com:dills122/nedb.git"
+    "url": "git+https://github.com/dills122/nedb.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
     "@yetzt/binary-search-tree": "^0.2.6",
