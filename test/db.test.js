@@ -8,8 +8,7 @@ var should = require('chai').should()
   , model = require('../lib/model')
   , Datastore = require('../lib/datastore')
   , Persistence = require('../lib/persistence')
-  , reloadTimeUpperBound = 60;   // In ms, an upper bound for the reload time used to check createdAt and updatedAt
-;
+  ;
 
 
 describe('Database', function () {
@@ -277,6 +276,8 @@ describe('Database', function () {
         docs.length.should.equal(0);
 
         d.insert(newDoc, function (err, insertedDoc) {
+          var insertCompletedAt = Date.now();
+
           // No side effect on given input
           assert.deepEqual(newDoc, { hello: 'world' });
           // Insert doc has two new fields, _id and createdAt
@@ -286,7 +287,8 @@ describe('Database', function () {
           insertedDoc.createdAt.should.equal(insertedDoc.updatedAt);
           assert.isDefined(insertedDoc._id);
           Object.keys(insertedDoc).length.should.equal(4);
-          assert.isBelow(Math.abs(insertedDoc.createdAt.getTime() - beginning), reloadTimeUpperBound);   // No more than 30ms should have elapsed (worst case, if there is a flush)
+          assert.isAtLeast(insertedDoc.createdAt.getTime(), beginning);
+          assert.isAtMost(insertedDoc.createdAt.getTime(), insertCompletedAt);
 
           // Modifying results of insert doesn't change the cache
           insertedDoc.bloup = "another";
@@ -331,9 +333,12 @@ describe('Database', function () {
       var newDoc = { hello: 'world', createdAt: new Date(234) }, beginning = Date.now();
       d = new Datastore({ filename: testDb, timestampData: true, autoload: true });
       d.insert(newDoc, function (err, insertedDoc) {
+        var insertCompletedAt = Date.now();
+
         Object.keys(insertedDoc).length.should.equal(4);
         insertedDoc.createdAt.getTime().should.equal(234);   // Not modified
-        assert.isBelow(insertedDoc.updatedAt.getTime() - beginning, reloadTimeUpperBound);   // Created
+        assert.isAtLeast(insertedDoc.updatedAt.getTime(), beginning);
+        assert.isAtMost(insertedDoc.updatedAt.getTime(), insertCompletedAt);
 
         d.find({}, function (err, docs) {
           assert.deepEqual(insertedDoc, docs[0]);
@@ -353,9 +358,12 @@ describe('Database', function () {
       var newDoc = { hello: 'world', updatedAt: new Date(234) }, beginning = Date.now();
       d = new Datastore({ filename: testDb, timestampData: true, autoload: true });
       d.insert(newDoc, function (err, insertedDoc) {
+        var insertCompletedAt = Date.now();
+
         Object.keys(insertedDoc).length.should.equal(4);
         insertedDoc.updatedAt.getTime().should.equal(234);   // Not modified
-        assert.isBelow(insertedDoc.createdAt.getTime() - beginning, reloadTimeUpperBound);   // Created
+        assert.isAtLeast(insertedDoc.createdAt.getTime(), beginning);
+        assert.isAtMost(insertedDoc.createdAt.getTime(), insertCompletedAt);
 
         d.find({}, function (err, docs) {
           assert.deepEqual(insertedDoc, docs[0]);
@@ -1070,8 +1078,12 @@ describe('Database', function () {
       var beginning = Date.now();
       d = new Datastore({ filename: testDb, autoload: true, timestampData: true });
       d.insert({ hello: 'world' }, function (err, insertedDoc) {
-        assert.isBelow(insertedDoc.updatedAt.getTime() - beginning, reloadTimeUpperBound);
-        assert.isBelow(insertedDoc.createdAt.getTime() - beginning, reloadTimeUpperBound);
+        var insertCompletedAt = Date.now();
+
+        assert.isAtLeast(insertedDoc.updatedAt.getTime(), beginning);
+        assert.isAtMost(insertedDoc.updatedAt.getTime(), insertCompletedAt);
+        assert.isAtLeast(insertedDoc.createdAt.getTime(), beginning);
+        assert.isAtMost(insertedDoc.createdAt.getTime(), insertCompletedAt);
         Object.keys(insertedDoc).length.should.equal(4);
 
         // Wait 100ms before performing the update
@@ -1085,7 +1097,8 @@ describe('Database', function () {
               docs[0].createdAt.should.equal(insertedDoc.createdAt);
               docs[0].hello.should.equal('mars');
               assert.isAbove(docs[0].updatedAt.getTime() - beginning, 99);   // updatedAt modified
-              assert.isBelow(docs[0].updatedAt.getTime() - step1, reloadTimeUpperBound);   // updatedAt modified
+              assert.isAtLeast(docs[0].updatedAt.getTime(), step1);
+              assert.isAtMost(docs[0].updatedAt.getTime(), Date.now());
 
               done();
             });

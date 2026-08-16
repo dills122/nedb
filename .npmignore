@@ -1,4 +1,5 @@
 benchmarks/
+integration/
 test/
 test_lac/
 workspace/
