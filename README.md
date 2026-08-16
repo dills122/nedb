@@ -16,6 +16,8 @@ npm test                   # You'll need the dev dependencies to launch tests
 bower install @dills1220/nedb         # For the browser versions, which will be in browser-version/out
 ```
 
+The 1.9.x release line is tested on Node.js 14 through Node.js 24. It intentionally retains compatibility with older supported applications while receiving dependency and security fixes.
+
 ## API
 
 It is a subset of MongoDB's API (the most used operations).
