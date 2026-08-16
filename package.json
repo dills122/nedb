@@ -1,6 +1,6 @@
 {
   "name": "@dills1220/nedb",
-  "version": "1.9.2",
+  "version": "2.0.0",
   "author": {
     "name": "Dylan Steele",
     "email": "dylansteele57@gmail.com"
@@ -24,6 +24,9 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "dependencies": {
     "@yetzt/binary-search-tree": "^0.2.6",
     "async": "^3.2.6",
@@ -31,22 +34,26 @@
     "lodash": "^4.18.1"
   },
   "devDependencies": {
-    "chai": "^4.5.0",
-    "commander": "9.5.0",
-    "underscore": "^1.13.8",
+    "chai": "^6.2.2",
+    "commander": "15.0.0",
     "exec-time": "0.0.4",
-    "mocha": "10.8.2",
-    "sinon": "15.2.0"
+    "mocha": "^11.8.0",
+    "nyc": "^18.0.0",
+    "sinon": "^22.1.0",
+    "underscore": "^1.13.8"
   },
   "overrides": {
-    "brace-expansion": "2.1.4",
-    "js-yaml": "4.3.1",
-    "picomatch": "2.3.2"
+    "mocha": {
+      "diff": "8.0.3",
+      "serialize-javascript": "7.0.5"
+    }
   },
   "scripts": {
     "test": "mocha \"./test/**/*.test.js\"",
     "test:integration": "mocha \"./integration/**/*.integration.test.js\"",
     "test:all": "npm test && npm run test:integration",
+    "coverage": "nyc --reporter=text-summary --reporter=lcov npm run test:all",
+    "coverage:check": "nyc --check-coverage --lines 90 --functions 90 --branches 85 --statements 90 --reporter=text-summary --reporter=lcov npm run test:all",
     "example:basic": "node ./examples/basic-usage.js"
   },
   "main": "index",

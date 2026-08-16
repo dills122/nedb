@@ -1,5 +1,8 @@
 <img src="http://i.imgur.com/9O1xHFb.png" style="width: 25%; height: 25%; float: left;">
 
+[![CI](https://github.com/dills122/nedb/actions/workflows/ci.action.yml/badge.svg?branch=master)](https://github.com/dills122/nedb/actions/workflows/ci.action.yml)
+[![npm version](https://img.shields.io/npm/v/%40dills1220%2Fnedb)](https://www.npmjs.com/package/@dills1220/nedb)
+
 ## The JavaScript Database
 
 This is Identical in features to the original `nedb` just with updated packages and the security vulnerabilities fixed. I plan to keep it as is with regards to features because I do believe this is feature complete, but PRs are welcome if you have new ideas or refreshes in mind.
@@ -16,7 +19,12 @@ npm test                   # You'll need the dev dependencies to launch tests
 bower install @dills1220/nedb         # For the browser versions, which will be in browser-version/out
 ```
 
-The 1.9.x release line is tested on Node.js 14 through Node.js 24. It intentionally retains compatibility with older supported applications while receiving dependency and security fixes.
+### Runtime compatibility
+
+- Version 2 requires Node.js 22.12.0 or newer and is tested on Node.js 22, 24, and 26.
+- Version 1.9.2 is the final compatibility release for applications that still need older Node.js versions.
+
+Upgrading from 1.9.2 to 2.0.0 does not change the documented CommonJS callback API or the on-disk persistence format. The breaking change is the supported Node.js runtime floor.
 
 ## API
 

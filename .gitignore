@@ -21,3 +21,6 @@ browser-version/node_modules
 *.swp
 *~
 *.swo
+
+.nyc_output/
+coverage/

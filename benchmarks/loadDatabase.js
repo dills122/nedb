@@ -4,17 +4,13 @@ var Datastore = require('../lib/datastore')
   , path = require('path')
   , async = require('async')
   , commonUtilities = require('./commonUtilities')
+  , parseOptions = require('./cli').parseOptions
   , execTime = require('exec-time')
   , profiler = new execTime('LOADDB BENCH')
   , d = new Datastore(benchDb)
-  , program = require('commander')
+  , program = parseOptions()
   , n
   ;
-
-program
-  .option('-n --number [number]', 'Size of the collection to test on', parseInt)
-  .option('-i --with-index', 'Test with an index')
-  .parse(process.argv);
 
 n = program.number || 10000;
 

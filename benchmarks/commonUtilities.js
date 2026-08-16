@@ -7,6 +7,7 @@ var customUtils = require('../lib/customUtils')
   , path = require('path')
   , Datastore = require('../lib/datastore')
   , Persistence = require('../lib/persistence')
+  , parseOptions = require('./cli').parseOptions
   , executeAsap   // process.nextTick or setImmediate depending on your Node version
   ;
 
@@ -22,14 +23,8 @@ try {
  */
 module.exports.getConfiguration = function (benchDb) {
   var d, n
-    , program = require('commander')
+    , program = parseOptions()
     ;
-
-  program
-    .option('-n --number [number]', 'Size of the collection to test on', parseInt)
-    .option('-i --with-index', 'Use an index')
-    .option('-m --in-memory', 'Test with an in-memory only store')
-    .parse(process.argv);
 
   n = program.number || 10000;
 
@@ -302,7 +297,6 @@ module.exports.loadDatabase = function (d, n, profiler, cb) {
   }
   runFrom(0);
 };
-
 
 
 
